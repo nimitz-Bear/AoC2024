@@ -12,3 +12,4 @@
 /Users/isaacdestura/Documents/coding/AoC2024/AoC2024/obj/Debug/net9.0/AoC2024.pdb
 /Users/isaacdestura/Documents/coding/AoC2024/AoC2024/obj/Debug/net9.0/AoC2024.genruntimeconfig.cache
 /Users/isaacdestura/Documents/coding/AoC2024/AoC2024/obj/Debug/net9.0/ref/AoC2024.dll
+/Users/isaacdestura/Documents/coding/AoC2024/AoC2024/obj/Debug/net9.0/AoC2024.sourcelink.json

@@ -2,29 +2,29 @@ namespace AoC2024;
 
 public class Day1
 {
-    List<int> left = [];
-    List<int> right = [];
+    private readonly List<int> _left = [];
+    private readonly List<int> _right = [];
     public Day1(string[] input)
     {
         foreach (var line in input)
         {
-                var lineParts = line.Split("   ");
-                left.Add(int.Parse(lineParts[0]));
-                right.Add(int.Parse(lineParts[1]));
+            var lineParts = line.Split("   ");
+            _left.Add(int.Parse(lineParts[0]));
+            _right.Add(int.Parse(lineParts[1]));
         }
     }
     
     public int Part1()
     {
         var result = 0;
-        left.Sort();
-        right.Sort();
+        _left.Sort();
+        _right.Sort();
 
-        while (left.Count != 0 && right.Count != 0)
+        while (_left.Count != 0 && _right.Count != 0)
         {
-            result += Math.Abs(left[0] - right[0]);
-            left.RemoveAt(0);
-            right.RemoveAt(0);
+            result += Math.Abs(_left[0] - _right[0]);
+            _left.RemoveAt(0);
+            _right.RemoveAt(0);
         }
 
         return result;
@@ -33,15 +33,15 @@ public class Day1
     public int Part2()
     {
         var result = 0;
-        left.Sort();
-        right.Sort();
+        _left.Sort();
+        _right.Sort();
         
-        while (left.Count != 0)
+        while (_left.Count != 0)
         {
-            var oldSize = right.Count;
-            right.RemoveAll(i => i == left[0]);
-            result += left[0] * (oldSize - right.Count);
-            left.RemoveAt(0);
+            var oldSize = _right.Count;
+            _right.RemoveAll(i => i == _left[0]);
+            result += _left[0] * (oldSize - _right.Count);
+            _left.RemoveAt(0);
         }
 
         return result;

@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <None Include="bin\Debug\net9.0\day1.txt" />
+      <None Include="bin\Debug\net9.0\day2.txt" />
     </ItemGroup>
 
 </Project>

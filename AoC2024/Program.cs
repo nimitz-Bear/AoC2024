@@ -1,11 +1,8 @@
-﻿using System.Net.Mime;
-using System.Reflection;
-using AoC2024;
+﻿using AoC2024;
 
-
-var challenge = new Day1(Lines(Directory.GetCurrentDirectory()+"/Day1.txt").ToArray());
+var challenge = new Day2(Lines("day2.txt").ToArray());
 Console.WriteLine(challenge.Part1());
-challenge = new Day1(Lines(Directory.GetCurrentDirectory()+"/Day1.txt").ToArray());
+challenge = new Day2(Lines("day2.txt").ToArray());
 Console.WriteLine(challenge.Part2());
 
 IEnumerable<string> Lines(string path)
