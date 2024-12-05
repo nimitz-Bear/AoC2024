@@ -1,6 +1,7 @@
-﻿using AoC2024;
+﻿using System.Diagnostics;
+using AoC2024;
 
-var challenge = new Day4(Lines("day4.txt").ToArray());
+var challenge = new Day5(Lines("day5.txt").ToArray());
 Console.WriteLine(challenge.Part1());
 Console.WriteLine(challenge.Part2());
 
