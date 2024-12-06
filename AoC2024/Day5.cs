@@ -37,11 +37,11 @@ public partial class Day5
             if (!line.Contains(','))
                 continue;
 
-            var entry = MyRegex().Matches(line).Select(m => int.Parse(m.Value)).ToList();
+            var entry = line.Split(",").Select(int.Parse).ToList();
             if (IsEntryValid(entry))
               result += entry[entry.Count / 2];
         }
-
+        
         return result;
     }
     
@@ -53,7 +53,7 @@ public partial class Day5
             if (!line.Contains(','))
                 continue;
 
-            var entry = MyRegex().Matches(line).Select(m => int.Parse(m.Value)).ToList();
+            var entry = line.Split(",").Select(int.Parse).ToList();
             while (!IsEntryValid(entry))
                 FixEntry(entry);
             
@@ -95,7 +95,4 @@ public partial class Day5
         
         return result;
     }
-    
-    [GeneratedRegex(@"\d+")]
-    private static partial Regex MyRegex();
 }
