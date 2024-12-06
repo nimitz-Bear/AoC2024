@@ -1,4 +1,6 @@
-﻿namespace AoC2024;
+﻿using System.Runtime.InteropServices.JavaScript;
+
+namespace AoC2024;
 
 public class Day6
 {
@@ -13,7 +15,7 @@ public class Day6
         // find where the guard is
         for (var i = 0; i < _grid.Length; i++)
         {
-            _guardX = Array.FindIndex(_grid, row => row.Contains('^'));
+            _guardX = _grid[i].IndexOf('^');
             _guardY = i;
             
             if (_guardX != -1)
@@ -26,19 +28,55 @@ public class Day6
     public int Part1()
     {
         int[] dx = [0, 1, 0, -1];
-        int[] dy = [1, 0, -1, 0];
-        var result = 0;
+        int[] dy = [-1, 0, 1, 0];
+        var result = 1;
         
+        // Console.WriteLine($"{_guardX}, {_guardY}");
         while (IsInsideRoom(_guardX, _guardY))
         {
-            if (_grid[_guardX + dx[(int)_direction]][_guardY + dy[(int)_direction]] != '.')
-                _direction = (Direction)(((int)_direction + 1) % 4);
-            else
+            Console.WriteLine($"{_guardX}, {_guardY}");
+            if (!IsInsideRoom(_guardX + dx[(int)_direction], _guardY + dy[(int)_direction]))
+                break;
+
+            int nextX = _guardX + dx[(int)_direction];
+            int nextY = _guardY + dy[(int)_direction];
+            // Console.WriteLine("W" + _grid[nextX]);
+            // Console.WriteLine(_grid[nextX][nextY]);
+            switch (_grid[nextY][nextX])
             {
-                result++;
-                _guardX += dx[(int)_direction];
-                _guardY += dy[(int)_direction];
-            }
+                case '#':
+                {
+                    _direction = (Direction)(((int)_direction + 1) % 4);
+                    break;
+                }
+                case '.':
+                {
+                    var charArray = _grid[nextY].ToCharArray();
+                    charArray[nextX] = 'X';
+                    _grid[nextY] = new string(charArray);
+                    result++;
+                    // foreach (var line in _grid)
+                    //     Console.WriteLine(line);
+                    _guardX += dx[(int)_direction];
+                    _guardY += dy[(int)_direction];
+                    break;
+                }
+                case 'X':
+                {
+                    _guardX += dx[(int)_direction];
+                    _guardY += dy[(int)_direction];
+                    break;
+                }
+                case '^':
+                {
+                    _guardX += dx[(int)_direction];
+                    _guardY += dy[(int)_direction];
+                    break;
+                }
+                
+        } 
+            
+
 
         }
 

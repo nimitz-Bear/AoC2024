@@ -6,7 +6,7 @@ using AoC2024;
 // Console.WriteLine(challenge.Part2());
 
 var challenge = new Day6(Lines("day6.txt").ToArray());
-challenge.Part1();
+Console.WriteLine(challenge.Part1());
         
 IEnumerable<string> Lines(string path)
 {
