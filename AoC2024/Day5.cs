@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using Microsoft.Win32;
 
 namespace AoC2024;
 
@@ -21,10 +22,10 @@ public partial class Day5
             var first = int.Parse(numbers[0].ToString());
             var second = int.Parse(numbers[1].ToString());
             
-            if (_rules.ContainsKey(second))
-                _rules[second].Add(first);
+            if (_rules.ContainsKey(first))
+                _rules[first].Add(second);
             else
-                _rules[second] = [first];
+                _rules[first] = [second];
         }
     }
 
@@ -53,11 +54,10 @@ public partial class Day5
                 continue;
 
             var entry = MyRegex().Matches(line).Select(m => int.Parse(m.Value)).ToList();
-            if (!FixEntry(entry))
-            {
-                result += entry[entry.Count / 2];
-            }
-               
+            while (!IsEntryValid(entry))
+                FixEntry(entry);
+            
+            result += entry[entry.Count / 2];
         }
 
         return result;
@@ -67,13 +67,8 @@ public partial class Day5
     {
         for(var i = 0; i < entry.Count; i++)
         {
-            // look at the last few elements, check if any of them violate a previous rule
-            if (_rules.ContainsKey(entry[i]) && _rules[entry[i]].Any(rule => entry.Skip(i + 1).Contains(rule)))
+            if (_rules.ContainsKey(entry[i]) && _rules[entry[i]].Any(rule => entry.Take(i).Contains(rule)))
                 return false;
-            
-            // look at first `i` elements and see if any violate a next rule
-            // if (_next.ContainsKey(entry[i]) && _next[entry[i]].Any(rule => entry.Take(i).Contains(rule)))
-            //     return false;
         }
 
         return true;
@@ -83,23 +78,21 @@ public partial class Day5
     private bool FixEntry(List<int> entry)
     {
         var result = true;
-        for(var i = 0; i < entry.Count; i++)
-        {
-            // look at the last few elements, check if any of them violate a previous rule
-            if (_rules.TryGetValue(entry[i], out var prevRules) && prevRules.Any(rule => entry.Skip(i + 1).Contains(rule)))
+            for (var i = 0; i < entry.Count; i++)
             {
-                var indexToSwap = entry.Skip(i + 1).TakeWhile(x => x != entry[i]).Count();
-                Console.WriteLine(string.Join(";", entry));
-                // Console.WriteLine(en);
-                (entry[i], entry[indexToSwap]) = (entry[indexToSwap], entry[i]);
-                result = false;
-                Console.WriteLine();
-                // i = Math.Min(i, indexToSwap) + 1;
-            }
+                var brokenRule = -1;
+                if (_rules.ContainsKey(entry[i]) && _rules[entry[i]].Any(rule =>
+                    {
+                        brokenRule = rule;
+                        return entry.Take(i).Contains(rule);
+                    }))
+                {
+                    var indexToSwap = entry.FindIndex(v => v == brokenRule);
+                    (entry[i], entry[indexToSwap]) = (entry[indexToSwap], entry[i]);
+                    return false;
+                }
         }
         
-        if (!result)
-         Console.WriteLine(string.Join(";", entry));
         return result;
     }
     
