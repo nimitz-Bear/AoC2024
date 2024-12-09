@@ -54,10 +54,21 @@ public partial class Day5
                 continue;
 
             var entry = line.Split(",").Select(int.Parse).ToList();
+            bool corrected = false;
             while (!IsEntryValid(entry))
+            {
                 FixEntry(entry);
+                corrected = true;
+            }
+
+            if (corrected)
+            {
+                Console.WriteLine(string.Join(",", entry));
+                result += entry[entry.Count / 2];
+            }
+                
             
-            result += entry[entry.Count / 2];
+            
         }
 
         return result;
