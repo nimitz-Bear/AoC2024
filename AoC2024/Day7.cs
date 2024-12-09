@@ -26,8 +26,6 @@ public class Day7
             {
                 // create a binary string for each combination, where 0 is + and 1 is *
                 var binary = Convert.ToString(i, 2).PadLeft(entry.Item2.Count - 1, '0');
-                Console.WriteLine(binary);
-            
                 
                 // use the binary to figure out the total
                 var j = 1;
@@ -49,6 +47,53 @@ public class Day7
                 }
            
             }
+        }
+        
+        return result;
+    }
+
+    public long Part2()
+    {
+       var result = (long) 0;
+       char[] operators = ['0', '1', '2']; // 0 = +, 1 = *, 2 = ||
+        
+        foreach (var entry in _entries)
+        {
+        
+           var combinations = Enumerable.Repeat(operators, entry.Item2.Count - 1)
+                                      .Aggregate(
+                                          new[] { "" },
+                                          (acc, ops) => acc.SelectMany(x => ops, (x, op) => x + op).ToArray()
+                                      );
+
+           foreach (var combination in combinations)
+           {
+               var j = 1;
+               var total = entry.Item2[0];
+               foreach (var digit in combination)
+               {
+                   switch (digit)
+                   {
+                       case '0':
+                           total += entry.Item2[j];
+                           break;
+                       case '1':
+                           total *= entry.Item2[j];
+                           break;
+                       case '2':
+                           total = long.Parse("" + total + entry.Item2[j]);
+                           break;
+                   }
+
+                   j++;
+               }
+
+               if (total == entry.Item1)
+               {
+                   result += total;
+                   break;
+               } 
+           }
         }
         
         return result;

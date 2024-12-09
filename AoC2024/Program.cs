@@ -2,6 +2,7 @@
 
 var challenge = new Day7(Lines("day7.txt").ToArray());
 Console.WriteLine(challenge.Part1());
+Console.WriteLine(challenge.Part2());
 
 return;
 
