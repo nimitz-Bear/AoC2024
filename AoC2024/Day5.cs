@@ -1,12 +1,11 @@
 using System.Text.RegularExpressions;
-using Microsoft.Win32;
 
 namespace AoC2024;
 
 public partial class Day5
 {
-    private Dictionary<int, List<int>> _rules = new();
-    private string[] _input;
+    private readonly Dictionary<int, List<int>> _rules = new();
+    private readonly string[] _input;
     
     public Day5(string[] input)
     {
@@ -54,7 +53,7 @@ public partial class Day5
                 continue;
 
             var entry = line.Split(",").Select(int.Parse).ToList();
-            bool corrected = false;
+            var corrected = false;
             while (!IsEntryValid(entry))
             {
                 FixEntry(entry);
@@ -62,13 +61,7 @@ public partial class Day5
             }
 
             if (corrected)
-            {
-                Console.WriteLine(string.Join(",", entry));
                 result += entry[entry.Count / 2];
-            }
-                
-            
-            
         }
 
         return result;
@@ -85,7 +78,7 @@ public partial class Day5
         return true;
     }
     
-    // return true if its already correct
+    // return true if it's already correct
     private bool FixEntry(List<int> entry)
     {
         var result = true;
