@@ -99,17 +99,12 @@ public class Day8
                         _antinodes.Add(new Tuple<int, int>(antinodeX, antinodeY));
                         _grid[antinodeY][antinodeX] = '#';
                         
-                        Console.WriteLine($"{antinodeX} {antinodeY}");
-                        
                         antinodeX += dx;
                         antinodeY += dy;
                     }
                 }
             }
         }
-        
-        foreach (var line in _grid)
-            Console.WriteLine(new string(line));
 
         return _antinodes.Count;
     }
