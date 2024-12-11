@@ -18,6 +18,7 @@
 
     <ItemGroup>
       <Content Include="bin\Debug\net9.0\day10.txt" />
+      <Content Include="bin\Debug\net9.0\day11.txt" />
       <Content Include="bin\Debug\net9.0\day5.txt" />
       <Content Include="bin\Debug\net9.0\day7.txt" />
       <Content Include="bin\Debug\net9.0\day8.txt" />
