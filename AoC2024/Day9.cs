@@ -3,17 +3,17 @@
 public class Day9
 {
     private readonly List<Tuple<int, bool, int>> _disk = []; // size, isFree, id
-    private string status = String.Empty; // represent the disk as a string
+    private readonly string _status = string.Empty; // represent the disk as a string
     
     public Day9(string input)
     {
-        bool isFree = false;
-        int i = 0;
+        var isFree = false;
+        var i = 0;
         foreach (char c in input)
         {
-            int size = c - '0';
+            var size = c - '0';
             _disk.Add(new Tuple<int, bool, int>(size, isFree, i));
-            status += isFree ? new string('.', size): new string('X', size);
+            _status += isFree ? new string('.', size): new string('X', size);
             isFree = !isFree;
         }
     }
@@ -30,7 +30,7 @@ public class Day9
         int position = 0;
   
         // while there is empty space to the left of the file and there and there are other files to move
-        while (status.Substring(0, files.First().Item2).Contains('.'))
+        while (_status.Substring(0, files.First().Item2).Contains('.'))
         {
             var file = files.First().Item1;
 
