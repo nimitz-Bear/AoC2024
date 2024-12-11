@@ -1,12 +1,10 @@
-﻿using System.Data;
-
-namespace AoC2024;
+﻿namespace AoC2024;
 
 public class Day10
 {
-    private char[][] _grid;
-    private int[] _dx = [0, 1, 0, -1];
-    private int[] _dy = [1, 0, -1, 0];
+    private readonly char[][] _grid;
+    private readonly int[] _dx = [0, 1, 0, -1];
+    private readonly int[] _dy = [1, 0, -1, 0];
 
     public Day10(string[] input) =>
         _grid = input.Select(row => row.ToCharArray()).ToArray();
@@ -111,7 +109,6 @@ public class Day10
                     if (IsCoordinateValid(current.Item1 + _dy[i], current.Item2 + _dx[i]) &&
                         _grid[current.Item1 + _dy[i]][current.Item2 + _dx[i]] == '9')
                         total++;
-
                 }
             }
             else
