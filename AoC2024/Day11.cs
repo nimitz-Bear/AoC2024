@@ -2,21 +2,52 @@
 
 public class Day11(string input)
 {
-    private readonly List<int> _stones = input.Split(" ").Select(int.Parse).ToList();
+    private readonly List<long> _stones = input.Split(" ").Select(long.Parse).ToList();
 
     public int Part1()
     {
-        for (int x = 0; x < 25; x++)
+        for (var x = 0; x < 75; x++)
         {
-            for (int i = 0; i < _stones.Count; i++)
+            for (var i = 0; i < _stones.Count; i++)
             {
                 if (_stones[i] == 0)
                     _stones[i] = 1;
                 else if (_stones[i].ToString().Length % 2 == 0)
                 {
-                    // split the number if the number of digits is even
-                    _stones[i] = int.Parse(_stones[i].ToString().Substring(0, _stones[i].ToString().Length / 2 - 1));
-                    _stones.Insert(i + 1, int.Parse(_stones[i].ToString().Substring(_stones[i].ToString().Length / 2 - 1)));
+                    var number = "" + _stones[i];
+                    _stones[i] = long.Parse(number.Substring(0, number.Length / 2));
+                    _stones.Insert(i + 1, long.Parse(number.Substring(number.Length / 2)));
+                    i++;
+                }
+                else
+                    _stones[i] *= 2024;
+            }
+            
+        }
+
+        return _stones.Count;
+    }
+
+    public int Part2()
+    {
+        Dictionary<long, int> cache = []; // value, count
+        
+        for (var x = 0; x < 75; x++)
+        {
+            for (var i = 0; i < _stones.Count; i++)
+            {
+                if (cache.ContainsKey(_stones[i]))
+                {
+                    
+                }
+                else if (_stones[i] == 0)
+                    _stones[i] = 1;
+                else if (_stones[i].ToString().Length % 2 == 0)
+                {
+                    var number = "" + _stones[i];
+                    _stones[i] = long.Parse(number.Substring(0, number.Length / 2));
+                    _stones.Insert(i + 1, long.Parse(number.Substring(number.Length / 2)));
+                    i++;
                 }
                 else
                     _stones[i] *= 2024;

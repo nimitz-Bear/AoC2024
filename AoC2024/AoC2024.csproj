@@ -25,8 +25,4 @@
       <Content Include="bin\Debug\net9.0\day9.txt" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Compile Include="bin\Debug\net9.0\day7.txt.cs" />
-    </ItemGroup>
-
 </Project>
