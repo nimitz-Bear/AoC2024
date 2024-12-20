@@ -5,7 +5,7 @@ public class Day14
     private readonly List<Tuple<int, int>> _robots = [];
     private readonly List<Tuple<int, int>> _velocities = [];
     private const int Width = 101, Height = 103;
-    char[,] grid = new char[Width, Height];
+    private char[,] _grid = new char[Width, Height];
     
     public Day14(string[] input)
     {
@@ -46,7 +46,7 @@ public class Day14
     {
         for (var i = 0; i < 100000; i++)
         {
-            grid = new char[Width, Height];
+            _grid = new char[Width, Height];
             
             HashSet<Tuple<int, int>> visited = [];
             for (var x = 0; x < _robots.Count; x++)
@@ -65,16 +65,16 @@ public class Day14
                     _robots[x] = new Tuple<int, int>(_robots[x].Item1, _robots[x].Item2 % Height);
                 
                 visited.Add(_robots[x]);
-                grid[_robots[x].Item1, _robots[x].Item2] = '#';
+                _grid[_robots[x].Item1, _robots[x].Item2] = '#';
             }
 
             if (visited.Count == _robots.Count)
             {
-                for (var w = 0; w < grid.GetLength(0); w++) // Iterate over rows
+                for (var w = 0; w < _grid.GetLength(0); w++) // Iterate over rows
                 {
-                    for (var h = 0; h < grid.GetLength(1); h++)
+                    for (var h = 0; h < _grid.GetLength(1); h++)
                     {
-                        if (grid[w, h] == '#')
+                        if (_grid[w, h] == '#')
                             Console.Write('#');
                         else 
                             Console.Write(' ');

@@ -21,6 +21,8 @@
       <Content Include="bin\Debug\net9.0\day11.txt" />
       <Content Include="bin\Debug\net9.0\day12.txt" />
       <Content Include="bin\Debug\net9.0\day14.txt" />
+      <Content Include="bin\Debug\net9.0\day18.txt" />
+      <Content Include="bin\Debug\net9.0\day19.txt" />
       <Content Include="bin\Debug\net9.0\day5.txt" />
       <Content Include="bin\Debug\net9.0\day7.txt" />
       <Content Include="bin\Debug\net9.0\day8.txt" />
